@@ -30,8 +30,10 @@ public class CouponServiceImpl implements CouponService{
             } catch (JsonProcessingException e) {
                 throw new RuntimeException("Unable to parse input", e);
             }
+            return "added";
         }
-        return "Added";
+        return "Coupon type unknown";
+
     }
 
     private void addCouponToRepository(Coupon coupon) {
