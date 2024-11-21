@@ -5,27 +5,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Coupon {
-    @JsonProperty("type")
-    private String type;
-    private LocalDateTime expirationTime;
-    private int couponId;
+public class ProductCoupon extends Coupon{
+    @JsonProperty("details")
+    private ProductDetails details;
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Coupon coupon = (Coupon) o;
-        return Objects.equals(type, coupon.type) && Objects.equals(expirationTime, coupon.expirationTime);
+        if (!super.equals(o)) return false;
+        ProductCoupon that = (ProductCoupon) o;
+        return Objects.equals(details, that.details);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, expirationTime);
+        return Objects.hash(super.hashCode(), details);
     }
 }

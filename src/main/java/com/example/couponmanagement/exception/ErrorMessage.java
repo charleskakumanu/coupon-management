@@ -1,4 +1,4 @@
-package com.example.couponmanagement.advice;
+package com.example.couponmanagement.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

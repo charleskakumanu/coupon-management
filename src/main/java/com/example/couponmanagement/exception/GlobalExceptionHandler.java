@@ -1,4 +1,4 @@
-package com.example.couponmanagement.advice;
+package com.example.couponmanagement.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

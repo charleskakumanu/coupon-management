@@ -1,8 +1,9 @@
 package com.example.couponmanagement.constants;
 
 public enum CouponTypes {
-    CART_WISE("cart-wise");
-
+    CART_WISE("cart-wise"),
+    PRODUCT_WISE("product-wise"),
+    BXGY("bxgy");
     private final String couponName;
 
     CouponTypes(String couponName) {
