@@ -2,58 +2,56 @@ package com.example.couponmanagement.repository;
 
 import com.example.couponmanagement.constants.CouponTypes;
 import com.example.couponmanagement.dao.*;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class CouponRepository {
-    private int cartCouponCounter = 0;
-    private int productCouponCounter = 0;
-    private int bxgyCouponCounter = 0;
+    private int couponIDCounter = 0;
 
-    private synchronized int incrementCartCouponCounter() {
-        return ++cartCouponCounter;
-    }
-
-    private synchronized int incrementProductCouponCounter() {
-        return ++productCouponCounter;
-    }
-
-    private synchronized int incrementBXGYCouponCounter() {
-        return ++bxgyCouponCounter;
+    private synchronized int incrementCouponIDCounter() {
+        return ++couponIDCounter;
     }
 
     List<CartCoupon> cartCouponList = new ArrayList<>();
     List<ProductCoupon> productCouponList = new ArrayList<>();
     List<BXGYCoupon> bxgyCouponList = new ArrayList<>();
+    @Getter
+    Map<Integer, CouponTypes> idToTypeMap = new HashMap<>();
 
     public void saveCartCoupon(CartCoupon cartCoupon) {
        if (cartCouponList.contains(cartCoupon)) {
            throwRuntimeException();
        } else {
-           cartCoupon.setCouponId(incrementCartCouponCounter());
+           cartCoupon.setCouponId(incrementCouponIDCounter());
            cartCouponList.add(cartCoupon);
        }
+       idToTypeMap.put(couponIDCounter, CouponTypes.CART_WISE);
     }
 
     public void saveProductCoupon(ProductCoupon productCoupon) {
         if (productCouponList.contains(productCoupon)) {
             throwRuntimeException();
         } else {
-            productCoupon.setCouponId(incrementProductCouponCounter());
+            productCoupon.setCouponId(incrementCouponIDCounter());
             productCouponList.add(productCoupon);
         }
+        idToTypeMap.put(couponIDCounter, CouponTypes.PRODUCT_WISE);
     }
 
     public void saveBXGYCoupon(BXGYCoupon bxgyCoupon) {
         if (bxgyCouponList.contains(bxgyCoupon)) {
             throwRuntimeException();
         } else {
-            bxgyCoupon.setCouponId(incrementBXGYCouponCounter());
+            bxgyCoupon.setCouponId(incrementCouponIDCounter());
             bxgyCouponList.add(bxgyCoupon);
         }
+        idToTypeMap.put(couponIDCounter, CouponTypes.BXGY);
     }
 
     private void throwRuntimeException() {

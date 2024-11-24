@@ -13,16 +13,17 @@ import java.util.Objects;
 @NoArgsConstructor
 public class ProductDetails {
     @JsonProperty("product_id")
-    private int productId;
-    private int quantity;
-    private int price;
-    private int discount;
+    private Integer productId;
+    private Integer quantity;
+    private Integer price;
+    private Integer discount = 0;
+    private Integer total_discount = 0;
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ProductDetails that = (ProductDetails) o;
-        return productId == that.productId && quantity == that.quantity && price == that.price && discount == that.discount;
+        return Objects.equals(productId, that.productId) && Objects.equals(quantity, that.quantity) && Objects.equals(price, that.price) && Objects.equals(discount, that.discount);
     }
 
     @Override
